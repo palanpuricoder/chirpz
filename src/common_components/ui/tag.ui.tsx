@@ -5,6 +5,7 @@ import { height, width } from '../../utils/functions.utils';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome6'
 import { useNavigation } from '@react-navigation/native';
+import { regular } from '../../utils/constants.utils';
 
 interface TagComponentProps {
     icon?: any;
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.tagTextBg,
         margin: 5,
         paddingHorizontal: 10,
-        borderRadius: 5
+        borderRadius: 5,
     },
     tagText:{
         color : Colors.light,
-        fontFamily : 'inter-Reguler',
+        fontFamily : regular,
         fontSize:12
     },
     plus: {

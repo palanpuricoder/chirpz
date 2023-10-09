@@ -31,7 +31,7 @@ const HomeScreen = (props: any) => {
 
     return (
         <View style={styles.container}>
-            <Header text='Chirpz' isButton={false}/>
+            <Header headerTitle='Chirpz' isButton={false} />
             <Plus onPress={() => { props?.navigation.navigate("Create") }} />
             {state.length > 0 ?
                 <FlatList

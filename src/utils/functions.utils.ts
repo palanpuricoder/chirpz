@@ -7,17 +7,12 @@ import {
     PermissionsAndroid,
     Platform,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { serverUrl } from './constants.utils';
 
 export const { width, height } = Dimensions.get('window');
 
 export const aspectRatio = height / width;
-
-export const getBaseURL = () => {
-    let baseURL = 'http://localhost:4000/api/v1';
-    return baseURL;
-};
 
 export const useSetState = (initialState: any) => {
     const [state, setState] = useState(initialState);
@@ -79,32 +74,3 @@ export const modelError = (error: any) => {
       return error;
     }
   };
-
-export const getItem = async (key: string) => {
-    try {
-        const data = await AsyncStorage.getItem(key);
-        if (data) {
-            return data;
-        } else {
-            null;
-        }
-    } catch (error) {
-        return null;
-    }
-};
-
-export const setItem = async (key: string, data: any) => {
-    try {
-        await AsyncStorage.setItem(key, data);
-    } catch (error) {
-        return null;
-    }
-};
-
-export const removeItem = async (key: string) => {
-    try {
-        await AsyncStorage.removeItem(key);
-    } catch (error) {
-        return null;
-    }
-};

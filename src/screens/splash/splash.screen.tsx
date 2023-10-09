@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import themeUtils from '../../utils/theme.utils';
 
@@ -13,6 +13,7 @@ const Splash = (props : any) => {
     
     return (
         <View style={styles.container}>
+            <StatusBar hidden={false}/>
             <View
                 style={styles.logoContainer}
             >

@@ -1,7 +1,8 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Colors } from '../../utils/imports.utils';
 import Icon from 'react-native-vector-icons/FontAwesome6'
+import { bold } from '../../utils/constants.utils';
 
 interface HeaderComponentProps {
     icon?: string;
@@ -9,82 +10,92 @@ interface HeaderComponentProps {
     width?: any;
     backgroundColor?: any;
     onPress?: any;
-    text?: string;
+    headerTitle?: string;
     navButtonBg?: string;
     onNav?: any;
     isButton?: any;
-    onPostClick?:any;
+    onPostClick?: any;
 }
+
+const height = Dimensions.get('window').height
+const width1 = Dimensions.get('window').width
 
 const Header = (props: HeaderComponentProps) => {
     return (
         <View
-            style={[
-                styles.header,
-                {
-                    width: props.width ? props.width : '100%',
-                    height: props.height ? props.height : 80,
-                },
-            ]}>
+            style={[styles.header]}
+        >
             <View
-                style={styles.iconWrapper}
+                style={[styles.section]}
             >
-                {/* <ion-icon name="arrow-back"></ion-icon> */}
-                {props.icon ?
-                    <TouchableOpacity
-                        onPress={props.onNav}
-                    >
+                <View
+                    style={styles.iconWrapper}
+                >
+                    {props.icon ?
+                        <TouchableOpacity
+                            onPress={props.onNav}
+                        >
+                            <Image
+                                style={{
+                                    resizeMode: 'stretch',
+                                }}
+                                source={require("../../assets/images/back.png")}
+                            />
+                        </TouchableOpacity>
+                        :
                         <Image
-                            style={{
-                                // width:'auto',
-                                // height:'auto',
-                                resizeMode: 'stretch',
-                            }}
-                            source={require("../../assets/images/back.png")}
+                            source={require("../../assets/images/ProfilePicture.png")}
                         />
-                    </TouchableOpacity>
-                    :
-                    <Image
-                        source={require("../../assets/images/ProfilePicture.png")}
-                    />
-                }
+                    }
+                </View>
             </View>
             <View
-                style={styles.textWrapper}
+             style={[
+                styles.section,
+                {
+                    alignItems: 'center',
+                }
+            ]}
             >
-                {props.text ?
+                {props.headerTitle ?
                     <Text
-                        style={{
-                            fontFamily: 'inter-Bold',
-                            fontSize: 30,
-                            color: "white",
-                        }}
+                        style={styles.headerTitle}
                     >
-                        {props.text}
+                        {props.headerTitle}
                     </Text>
                     :
                     null
                 }
             </View>
-            {props.isButton ?
-                <View
-                    style={styles.postView}
-                >
-                    <TouchableOpacity
-                        onPress={props.onPostClick}
-                    >
-                        <Text
-                            style={styles.postButton}
+            <View
+                style={[
+                    styles.section,
+                    {
+                        alignItems: 'center',
+                    }
+                ]}
+                
+            >
+                {props.isButton ?
+                        <View
+                            style={styles.postView}
                         >
-                            {"Post"}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                :
-                <View
-                    style={styles.textWrapper}
-                >
-                </View>}
+                            <TouchableOpacity
+                                onPress={props.onPostClick}
+                            >
+                                <Text
+                                    style={styles.postButton}
+                                >
+                                    {"Post"}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    :
+                    <View
+                        style={styles.textWrapper}
+                    >
+                    </View>}
+            </View>
         </View>
     )
 }
@@ -94,25 +105,32 @@ export default Header
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        height: height*0.08,
         flexDirection: 'row',
-        backgroundColorL: Colors.naviblue,
+        backgroundColor: Colors.naviblue,
         borderBottomWidth: 1,
         borderColor: Colors.border
     },
+    section:{
+        flex: 1 / 3,
+        justifyContent: 'center',
+    },
+    headerTitle:{
+        fontFamily: bold,
+        fontSize: 20,
+        color: "white",
+    },
     postView: {
         backgroundColor: Colors.buttonColor,
-        width: '20%',
-        height: '35%',
+        width: '60%',
+        height: '60%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         marginRight: 8
     },
     postButton: {
-        fontFamily: 'inter-Bold',
-        fontWeight: '700',
+        fontFamily: bold,
         fontSize: 15,
         color: Colors.light
     },
@@ -120,7 +138,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: 'blue',
         height: '100%',
     },
     iconWrapper: {
@@ -132,8 +149,10 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     textWrapper: {
+        // flex: 1,
         flexDirection: 'row',
-        // alignItems: 'center',
+        backgroundColor: 'orange',
+        alignItems: 'center',
         // justifyContent: 'center',
 
     },

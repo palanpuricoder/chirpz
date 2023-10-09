@@ -31,15 +31,10 @@ const Plus = (props: PlusComponentProps) => {
                 style={[styles.iconWrapper]}
                 onPress={props.onPress}
             >
-                    <Image
-                        style={{
-                            width:'40%',
-                            height:'40%',
-                            resizeMode: 'stretch',
-                            tintColor:Colors.naviblue,
-                        }}
-                        source={require("../../assets/images/plus.png")}
-                    />
+                <Image
+                    style={styles.plusImgWrapper}
+                    source={require("../../assets/images/plus.png")}
+                />
             </TouchableOpacity>
         </LinearGradient>
     )
@@ -48,6 +43,12 @@ const Plus = (props: PlusComponentProps) => {
 export default Plus;
 
 const styles = StyleSheet.create({
+    plusImgWrapper: {
+        width: '40%',
+        height: '40%',
+        resizeMode: 'stretch',
+        tintColor: Colors.naviblue,
+    },
     plus: {
         width: '100%',
         alignItems: 'center',

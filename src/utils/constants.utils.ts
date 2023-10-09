@@ -2,13 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 // font family
-export const regular = 'OpenSans-Regular';
-export const bold = 'OpenSans-Bold';
-export const italic = 'OpenSans-Italic';
-export const boldItalic = 'OpenSans-BoldItalic';
-export const semiBold = 'OpenSans-SemiBold';
-export const lightItalic = "OpenSans-LightItalic"
-export const semiBoldItalic = "OpenSans-SemiBoldItalic"
+export const regular = 'Inter-Regular';
+export const bold = 'Inter-Bold';
+export const light = 'Inter-Light';
 
 // App Constants
 export const statusBarHeight = getStatusBarHeight();

@@ -1,21 +1,22 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Colors } from '../../utils/imports.utils';
+import { bold } from '../../utils/constants.utils';
 
 interface InputComponentProps {
     backgroundColor?: any;
     height?: number;
     width?: number;
     style?: any;
-    style2?: any;
+    inputwrapperstyle2?: any;
     onPress?: any;
     data?: any;
     text?: string;
     placeHolder?: string;
     onChangeText?: any;
     isAdd?: boolean;
-    onAddClick ?: any;
-    input2 ?:string
+    onAddClick?: any;
+    input2?: string
 }
 
 const Input = (props: InputComponentProps) => {
@@ -32,18 +33,16 @@ const Input = (props: InputComponentProps) => {
                     {props.text}
                 </Text>
                 <View
-                    style={[props.style2, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }]}
+                    style={[props.inputwrapperstyle2, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' , marginRight:20 }]}
                 >
                     <TextInput
                         value={props.input2}
                         placeholder={props.placeHolder}
                         onChangeText={props.onChangeText}
                         style={props.style}
-                        // style={{
-                        //     color:'white'
-                        // }}
                         placeholderTextColor={Colors.border}
                     />
+
                     {props.isAdd ?
                         <TouchableOpacity
                             onPress={props.onAddClick}
@@ -69,13 +68,12 @@ const styles = StyleSheet.create({
 
     },
     text: {
-        fontFamily: "inter-Bold",
+        fontFamily: bold,
         color: "white",
         fontSize: 18,
-        fontWeight: '700'
     },
     text2: {
-        fontFamily: "inter-Bold",
+        fontFamily: bold,
         color: "white",
         fontSize: 18,
         fontWeight: '400'

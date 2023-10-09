@@ -10,13 +10,16 @@ import { getPost } from '../../store/actions/post.action';
 import List from '../../common_components/ui/list.ui';
 import Input from '../../common_components/ui/input.ui';
 import Tag from '../../common_components/ui/tag.ui';
+import { bold, regular } from '../../utils/constants.utils';
 
 const CreatePostScreen = (props: any) => {
 
     const dispatch = useDispatch()
+
     const [postTitle, setpostTitle] = useState<string>('');
     const [tag, setTag] = useState<string>('');
     const [tagList, setTagList] = useState<[]>([]);
+    const [add, setAdd] = useState<boolean>(false);
 
     const getPostData = () => {
         Models.posts.getPosts()
@@ -37,27 +40,19 @@ const CreatePostScreen = (props: any) => {
         }
         Models.posts.createPosts(body)
             .then((res: any) => {
-                console.log("res ----->>>>>>",res );
+                console.log("res ----->>>>>>", res);
                 getPostData()
-                // dispatch(createPost(res?.body))
             })
             .catch(err => {
                 console.log("error =====>>>>>>>>", err);
             })
     }
 
-    console.log("title ----->>>>>>>", tagList);
-
     return (
         <View style={styles.container}>
-            <Header onNav={() => props.navigation.goBack()} icon={"arrow-round-back"} isButton={true} onPostClick={()=>createPost()} />
+            <Header onNav={() => props.navigation.goBack()} icon={"arrow-round-back"} isButton={true} onPostClick={() => createPost()} />
             <View
-                style={[
-                    {
-                        width: "100%",
-                        marginTop: 30
-                    }
-                ]}
+                style={[styles.inputWrapper]}
             >
                 <Input
                     text='Create'
@@ -67,7 +62,7 @@ const CreatePostScreen = (props: any) => {
                     }}
                     style={{
                         color: Colors.light,
-                        fontFamily: 'inter-Bold',
+                        fontFamily: regular,
                     }}
                     isAdd={false}
                 />
@@ -75,31 +70,32 @@ const CreatePostScreen = (props: any) => {
                     text='Add Tags'
                     placeHolder='Write tags'
                     style={{
-
                         color: Colors.light,
-                        fontFamily: 'inter-Bold',
+                        fontFamily: regular,
                     }}
-                    style2={{
+                    inputwrapperstyle2={{
                         borderBottomColor: Colors.border,
                         borderBottomWidth: 0.5,
                     }}
-                    isAdd={true}
+                    isAdd={add}
                     input2={tag}
-                    onChangeText={(text: any) => setTag(text)}
+                    onChangeText={(text: any) => {
+                        setTag(text);
+                        setAdd(true);
+                    }}
                     onAddClick={() => {
-                        let arr : [] = tagList;
-                        tagList.push(tag);
-                        setTagList(arr);
+                        setTagList(cur => [...cur, tag])
                         setTag('');
+                        setAdd(false);
                     }} />
                 <View
                     style={{
                         flexDirection: 'row',
                         width: '100%',
-                        margin:8
+                        margin: 8
                     }}
                 >
-                        <Tag tagList={tagList}/>
+                    <Tag tagList={tagList} />
                 </View>
             </View>
         </View>
@@ -117,6 +113,10 @@ const styles = StyleSheet.create({
         margin: 5,
         paddingHorizontal: 10,
         borderRadius: 5
+    },
+    inputWrapper: {
+        width: "100%",
+        marginTop: 30
     }
 });
 
